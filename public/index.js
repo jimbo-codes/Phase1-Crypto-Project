@@ -22,6 +22,11 @@ document.querySelector('button[type="submit"]').addEventListener('click', (e) =>
 }
 )
 
+// Logo mouse over event
+
+const logo = document.getElementById('logo');
+logo.addEventListener('mouseover', () => alert('HODDDDLLLLLL'))
+
 // Helper Functions 
 
 // Create Objects GET request
@@ -43,7 +48,7 @@ function createObj(data) {
     market['market'] = data.market_data.market_cap.usd;
     market['volume'] = data.market_data.total_volume.usd;
     market['dod'] = data.market_data.price_change_24h_in_currency.usd;
-    market['wow'] = data.market_data.price_change_percentage_7d;
+    market['wow'] = `${data.market_data.price_change_percentage_7d} %`;
     market['rank'] = data.market_cap_rank;
 
     // Populate Social Object
