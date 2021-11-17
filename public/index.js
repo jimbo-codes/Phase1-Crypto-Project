@@ -1,78 +1,96 @@
-document.addEventListener("DOMContentLoaded", () => {
-    document.querySelector('button[type="submit"]').addEventListener('click', (e) => {
-        e.preventDefault();
-        let inputVal = document.querySelector('#searchBar').value;
-        let searchForm = document.getElementById('searchForm')
-        fetch(`https://api.coingecko.com/api/v3/coins/${inputVal}`)
-        .then(resp => resp.json())
-        .then(data => {
-            console.log(data);
-            let ourObj = {
-                name: data.name,
-                imageID: "https://assets.coingecko.com/coins/images/1/small/bitcoin.png?",
-                price: data.market_data.current_price.usd,
-                marketCap: data.market_data.market_cap.usd,
-                dodChng: data.market_data.price_change_24h_in_currency.usd,
-                weekPctChg: data.market_data.price_change_percentage_7d,
-                volTraded: data.market_data.total_volume.usd,
-                activeRedditAct: data.community_data.reddit_accounts_active_48h,
-                redditAvgComments: data.community_data.reddit_average_comments_48h,
-                redditAvgPosts: data.community_data.reddit_average_posts_48h,
-                redditSubs: data.community_data.reddit_subscribers,
-                twitter: data.community_data.twitter_followers
-            }
-            console.log(ourObj);
-            populateMarket(ourObj);
-            // populateSocial(ourObj);
-            // populateDeveloper(ourObj);
-            function populateMarket(dataObj){
-                // these could all be consolidated into a single function w/ id variable
-                let id = 'md';
-                let testArr =[];
-                let popArr = [data.market_data.current_price.usd,data.market_data.price_change_24h_in_currency.usd,data.market_data.price_change_percentage_7d,data.market_data.total_volume.usd,data.market_data.market_cap.usd]
-                for(let i=1;i<7;i++){
-                    if(i===1){
-                    document.getElementById(`${id}${i}`).innerHTML = `<div><td><img class = float-left src=${data.image.small} width=\"20px\" height=\"20px\">${data.name}</td></div>`
-                    }
-                    else{
-                    testArr.push(document.getElementById(`${id}${i}`))
-                    for(let j = 0; j<testArr.length; j++){
-                        popArr[j] = popArr[j].toLocaleString();
-                        // let a = popArr[j];
-                        // a = a.replace(new RegExp("^(\\d{" + (a.length%3?a.length%3:0) + "})(\\d{3})", "g"), "$1 $2").replace(/(\d{3})+?/gi, "$1 ").trim();
-                        
-                        testArr[j].textContent = popArr[j];
-                    }
-                }
-            }
-            }
-            function populateSocial(){
-                //define your social headers
-                let id = 'soc';
-                let testArr =[];
-                let popArr = [HERE]
-                for(let i=1;i<7;i++){
-                    if(i===1){
-                    document.getElementById(`${id}${i}`).innerHTML = `<div><td><img class = float-left src=${data.image.small} width=\"20px\" height=\"20px\">${data.name}</td></div>`
-                    }
-                    else{
-                    testArr.push(document.getElementById(`${id}${i}`))
-                    for(let j = 0; j<testArr.length; j++){
-                        testArr[j].textContent = popArr[j];
-                    }
-                }
-            }
-                // RedditAvgComments
-                // RedditAvgPosts
-                // RedditSubs
-                // Twitter (subs?)
-            }
-            function populateDeveloper(){
 
+// Load Bitcoin data by default 
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('https://api.coingecko.com/api/v3/coins/bitcoin')
+    .then(resp => resp.json())
+    .then(data => createObj(data))
+})
+
+// Search Event Listener
+
+document.querySelector('button[type="submit"]').addEventListener('click', (e) => {
+    e.preventDefault();
+    let inputVal = document.querySelector('#searchBar').value;
+    let searchForm = document.getElementById('searchForm')
+    fetch(`https://api.coingecko.com/api/v3/coins/${inputVal}`)
+    .then(resp => resp.json())
+    .then(data => {
+        createObj(data);
+    })
+    searchForm.reset();    
+}
+)
+
+// Logo Event Listener
+
+const logo = document.getElementById('logo');
+
+logo.addEventListener('mouseover', () => alert(`DON'T FORGET TO HOOOOODDDDDLLLL`))
+
+// Helper Functions 
+
+// Create Objects GET request
+
+function createObj(data) {
+
+    // Initialize and populate Object variables 
+
+    let market = {};
+    let social = {};
+    let dev = {};
+
+    let dataList = [market, social, dev]
+
+    // Populate Market Object
+
+    market['name'] = data.name;
+    market['image'] = data.image.small;
+    market['price'] = data.market_data.current_price.usd;
+    market['market'] = data.market_data.market_cap.usd;
+    market['volume'] = data.market_data.total_volume.usd;
+    market['dod'] = Math.floor(data.market_data.price_change_24h_in_currency.usd);
+    market['wow'] = data.market_data.price_change_percentage_7d.toFixed(1);
+    market['rank'] = data.market_cap_rank;
+
+    // Populate Social Object
+
+    social['twitter'] = data.community_data.twitter_followers;
+    social['reddit'] = data.community_data.reddit_subscribers;
+    social['reddit-active-posts'] = data.community_data.reddit_average_posts_48h.toFixed(1);
+    social['reddit-active-accounts'] = data.community_data.reddit_accounts_active_48h;
+    
+
+    // Populate Dev Object
+
+    dev['subs'] = data.developer_data.subscribers;
+    dev['forks'] = data.developer_data.forks;
+    dev['stars'] = data.developer_data.stars;
+    dev['commits'] = data.developer_data.commit_count_4_weeks;
+
+    dataList.forEach(renderObj)
+}
+
+// Render Objects
+
+function renderObj(obj) {
+
+
+    Object.keys(obj).forEach(key => {
+        console.log(obj[key]);
+        if(key==='image'){
+            document.getElementById(`name`).innerHTML = `<div><td><img class = float-left src=${obj[key]} width=\"20px\" height=\"20px\">${obj.name}</td></div>`
+        }else {
+            let cell = document.getElementById(`${key}`);
+            if(obj[key]<0){
+                    cell.textContent = obj[key].toLocaleString();
+                    cell.classList.add('text-red-500');    
+            }if(key==='wow'){
+                cell.textContent = `${obj[key].toLocaleString()}%`
+            }else{
+                cell.textContent = obj[key].toLocaleString();
             }
-        })
-    searchForm.reset();
-    console.log('clicked')
-    }
-    )
-});
+        }
+    })
+    
+}
