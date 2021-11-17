@@ -7,7 +7,7 @@
     <title>Degen Dashboard</title>
     <link rel="stylesheet" href="./tailwind.css">
     <title> The Degenerate Dashboard </title>
-    <script src="/index.js" defer></script>
+    <script src="index.js" defer></script>
 </head>
 <body>
 
@@ -171,44 +171,60 @@
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-          <table class="min-w-full divide-y divide-gray-200">
+          <table class="min-w-full table-auto divide-y divide-gray-200">
             <thead class="bg-gray-50">
               <tr class="bg-indigo-500">
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                <th scope="col" id = 'nameCol' class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   Name
                 </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                  Title
+                <th scope="col" id = 'priceCol' class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                  Price
                 </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                  Email
+                <th scope="col" id = 'DayChngCol' class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                  DoD Change
                 </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                  Role
+                <th scope="col" id = 'weekChngCol' class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                  Weekly Change
                 </th>
-                <th scope="col" class="relative px-6 py-3">
+                <!-- adding two new cols -->
+                <th scope="col" id = 'volTraded' class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                  Volume Traded
+                </th>
+                <th scope="col" id = 'mktCap' class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                  Market cap
+                </th>
+                <!-- <th scope="col" class="relative px-6 py-3">
                   <span class="sr-only">Edit</span>
-                </th>
+                </th> -->
               </tr>
             </thead>
             <tbody>
               <!-- Odd row -->
               <tr class="bg-white">
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                <td id= 'md1' class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <span id ='mdimg1'></span>
+                  <span id='mdtext1'></span>
                   Jane Cooper
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <td id= 'md2'class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   Regional Paradigm Technician
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <td id = 'md3'class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   jane.cooper@example.com
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <td id = 'md4'class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   Admin
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                <td id = 'md5'class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  Admin
                 </td>
+                <td id = 'md6'class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  Admin
+                </td>
+
+                <!-- <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                </td> -->
               </tr>
             </tbody>
           </table>
