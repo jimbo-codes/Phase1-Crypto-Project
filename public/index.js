@@ -39,6 +39,7 @@ function createObj(data) {
     // Populate Market Object
 
     market['name'] = data.name;
+    market['image'] = data.image.small;
     market['price'] = data.market_data.current_price.usd;
     market['market'] = data.market_data.market_cap.usd;
     market['volume'] = data.market_data.total_volume.usd;
@@ -70,9 +71,13 @@ function renderObj(obj) {
 
 
     Object.keys(obj).forEach(key => {
-        
+        console.log(obj['name']);
+        if(key==='image'){
+            document.getElementById(`name`).innerHTML = `<div><td><img class = float-left src=${obj[key]} width=\"20px\" height=\"20px\">${obj.name}</td></div>`
+        }else {
         let cell = document.getElementById(`${key}`);
-        cell.textContent = obj[key];
+        cell.textContent = obj[key].toLocaleString();;
+        }
     })
     
 }
