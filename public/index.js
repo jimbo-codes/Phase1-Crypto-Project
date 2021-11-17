@@ -21,7 +21,7 @@ document.querySelector('button[type="submit"]').addEventListener('click', (e) =>
     searchForm.reset();    
 }
 )
-
+console.log('test');
 // Logo Event Listener
 
 const logo = document.getElementById('logo');
