@@ -43,15 +43,15 @@ function createObj(data) {
     market['price'] = data.market_data.current_price.usd;
     market['market'] = data.market_data.market_cap.usd;
     market['volume'] = data.market_data.total_volume.usd;
-    market['dod'] = data.market_data.price_change_24h_in_currency.usd;
-    market['wow'] = data.market_data.price_change_percentage_7d;
+    market['dod'] = Math.floor(data.market_data.price_change_24h_in_currency.usd);
+    market['wow'] = data.market_data.price_change_percentage_7d.toFixed(1);
     market['rank'] = data.market_cap_rank;
 
     // Populate Social Object
 
     social['twitter'] = data.community_data.twitter_followers;
     social['reddit'] = data.community_data.reddit_subscribers;
-    social['reddit-active-posts'] = data.community_data.reddit_average_posts_48h;
+    social['reddit-active-posts'] = data.community_data.reddit_average_posts_48h.toFixed(1);
     social['reddit-active-accounts'] = data.community_data.reddit_accounts_active_48h;
     
 
@@ -77,12 +77,10 @@ function renderObj(obj) {
         }else {
             let cell = document.getElementById(`${key}`);
             if(obj[key]<0){
-                    obj[key] = obj[key].toFixed(1);
                     cell.textContent = obj[key].toLocaleString();
-                    cell.classList.add('text-red-500');
-                if(key==='wow'){
-                    cell.textContent = `${obj[key].toLocaleString()}%`
-                }
+                    cell.classList.add('text-red-500');    
+            }if(key==='wow'){
+                cell.textContent = `${obj[key].toLocaleString()}%`
             }else{
                 cell.textContent = obj[key].toLocaleString();
             }
