@@ -22,6 +22,12 @@ document.querySelector('button[type="submit"]').addEventListener('click', (e) =>
 }
 )
 
+// Logo Event Listener
+
+const logo = document.getElementById('logo');
+
+logo.addEventListener('mouseover', () => alert(`DON'T FORGET TO HOOOOODDDDDLLLL`))
+
 // Helper Functions 
 
 // Create Objects GET request
