@@ -71,12 +71,21 @@ function renderObj(obj) {
 
 
     Object.keys(obj).forEach(key => {
-        console.log(obj['name']);
+        console.log(obj[key]);
         if(key==='image'){
             document.getElementById(`name`).innerHTML = `<div><td><img class = float-left src=${obj[key]} width=\"20px\" height=\"20px\">${obj.name}</td></div>`
         }else {
-        let cell = document.getElementById(`${key}`);
-        cell.textContent = obj[key].toLocaleString();;
+            let cell = document.getElementById(`${key}`);
+            if(obj[key]<0){
+                    obj[key] = obj[key].toFixed(1);
+                    cell.textContent = obj[key].toLocaleString();
+                    cell.classList.add('text-red-500');
+                if(key==='wow'){
+                    cell.textContent = `${obj[key].toLocaleString()}%`
+                }
+            }else{
+                cell.textContent = obj[key].toLocaleString();
+            }
         }
     })
     
