@@ -1,0 +1,23 @@
+{
+  "name": "phase1-crypto-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tailwindcss build src/tailwind.css -o public/tailwind.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jimbo-codes/Phase1-Crypto-Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jimbo-codes/Phase1-Crypto-Project/issues"
+  },
+  "homepage": "https://github.com/jimbo-codes/Phase1-Crypto-Project#readme",
+  "dependencies": {
+    "tailwindcss": "^2.2.19"
+  }
+}
