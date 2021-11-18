@@ -12,16 +12,17 @@ document.addEventListener('DOMContentLoaded', () => {
 document.querySelector('button[type="submit"]').addEventListener('click', (e) => {
     e.preventDefault();
     let inputVal = document.querySelector('#searchBar').value;
+    inputVal = inputVal.replace(' ', '-')
     let searchForm = document.getElementById('searchForm')
     fetch(`https://api.coingecko.com/api/v3/coins/${inputVal}`)
     .then(resp => resp.json())
     .then(data => {
         createObj(data);
     })
-    searchForm.reset();    
+    searchForm.reset();
 }
 )
-console.log('test');
+
 // Logo Event Listener
 
 const logo = document.getElementById('logo');
@@ -77,7 +78,6 @@ function renderObj(obj) {
 
 
     Object.keys(obj).forEach(key => {
-        console.log(obj[key]);
         if(key==='image'){
             document.getElementById(`name`).innerHTML = `<div><td><img class = float-left src=${obj[key]} width=\"20px\" height=\"20px\">${obj.name}</td></div>`
         }else {
@@ -94,3 +94,12 @@ function renderObj(obj) {
     })
     
 }
+
+fetch('https://api.coingecko.com/api/v3/coins/')
+.then(resp => resp.json())
+.then(data => console.log(data))
+
+// create your Div for the "all inclusive" table
+
+//render for the different objects
+// create your micro objects from that list programtically, then run jay's populate function (foreach) and include a createrow (insertrow?)
