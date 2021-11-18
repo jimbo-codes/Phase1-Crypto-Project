@@ -26,8 +26,13 @@ document.querySelector('button[type="submit"]').addEventListener('click', (e) =>
 // Logo Event Listener
 
 const logo = document.getElementById('logo');
+let rotation = 0
 
-logo.addEventListener('mouseover', () => alert(`DON'T FORGET TO HOOOOODDDDDLLLL`))
+logo.addEventListener('mouseover', (e) => {
+    
+    rotation += 90;
+    e.target.style.transform = `rotate(${rotation}deg)`
+})
 
 // Helper Functions 
 
@@ -50,6 +55,8 @@ function createObj(data) {
     market['price'] = data.market_data.current_price.usd;
     market['market'] = data.market_data.market_cap.usd;
     market['volume'] = data.market_data.total_volume.usd;
+    market['dod'] = data.market_data.price_change_24h_in_currency.usd;
+    market['wow'] = `${data.market_data.price_change_percentage_7d} %`;
     market['dod'] = Math.floor(data.market_data.price_change_24h_in_currency.usd);
     market['wow'] = data.market_data.price_change_percentage_7d.toFixed(1);
     market['rank'] = data.market_cap_rank;
