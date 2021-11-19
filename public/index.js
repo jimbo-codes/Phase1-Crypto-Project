@@ -97,9 +97,24 @@ function renderObj(obj) {
 
 fetch('https://api.coingecko.com/api/v3/coins/')
 .then(resp => resp.json())
-.then(data => console.log(data))
+.then(data => {
+    // set the last table div to hidden until the populate function runs
 
-// create your Div for the "all inclusive" table
+    // returns an array of objects for each coin    
+
+    // document.getElementById('tableIntro').style.display = 'block'
+    // document.getElementById('tableFull').style.display = 'block'
+    // data.forEach(renderTable);
+
+// 2. go through each object within the array one item at a time (for x of y)
+// pull out the information from each object that you're going to put into the table
+// put it into the table, formatted as the others are
+// include a display button which is equivalent of search event for the same name
+})
+
+function renderTable(ArrObj) {
+    
+}
 
 //render for the different objects
 // create your micro objects from that list programtically, then run jay's populate function (foreach) and include a createrow (insertrow?)
